@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join the Club | Mochi & Bean</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="assets/js/app.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Quicksand', 'sans-serif'] },
+                    colors: {
+                        coffee: {
+                            50: '#fdf8f6',
+                            100: '#f2e8e5',
+                            200: '#eaddd7',
+                            500: '#a77f72', 
+                            600: '#8a6459',
+                            800: '#4a332a',
+                            900: '#2c1e19',
+                        },
+                        rose: '#F4ACB7',
+                        cream: '#FFFDD0',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Smooth fade for form switching */
+        .form-enter { animation: fadeIn 0.4s ease-in-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-coffee-50 min-h-screen flex items-center justify-center p-4">
+
+    <div class="fixed top-0 left-0 w-64 h-64 bg-rose/20 rounded-full blur-3xl -z-10 animate-pulse"></div>
+    <div class="fixed bottom-0 right-0 w-80 h-80 bg-coffee-200/40 rounded-full blur-3xl -z-10"></div>
+
+    <div class="bg-white rounded-[2.5rem] shadow-2xl w-full max-w-4xl overflow-hidden flex flex-col md:flex-row min-h-[600px]">
+        
+        <div class="hidden md:flex w-1/2 bg-coffee-100 relative items-center justify-center overflow-hidden group">
+            <div class="absolute inset-0 bg-black/10 z-10"></div>
+            <img src="https://images.unsplash.com/photo-1512568400610-62da28bc8a13?q=80&w=1000&auto=format&fit=crop" 
+                 class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" 
+                 alt="Coffee Art">
+            
+            <div class="relative z-20 text-center text-white p-8">
+                <h2 class="text-4xl font-bold mb-2 drop-shadow-md">Welcome Back!</h2>
+                <p class="text-lg opacity-90 drop-shadow-sm">Good vibes and great coffee await.</p>
+            </div>
+        </div>
+
+        <div class="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center relative">
+            
+            <a href="index.html" class="absolute top-6 right-6 text-coffee-400 hover:text-coffee-600 transition-colors">
+                <i class="ph-bold ph-x text-2xl"></i>
+            </a>
+
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center justify-center w-12 h-12 bg-coffee-50 rounded-full text-coffee-500 mb-3">
+                    <i class="ph-fill ph-coffee text-2xl"></i>
+                </div>
+                <h1 class="text-2xl font-bold text-coffee-900" id="form-title">Sign In</h1>
+            </div>
+
+            <form id="login-form" class="space-y-5 form-enter" onsubmit="handleLogin(event)">
+                <div>
+                    <label class="block text-sm font-bold text-coffee-600 mb-1 ml-1">Email Address</label>
+                    <div class="relative">
+                        <i class="ph ph-envelope absolute left-4 top-1/2 -translate-y-1/2 text-coffee-400 text-lg"></i>
+                        <input type="email" id="login-email" placeholder="hello@example.com" required
+                               class="w-full bg-coffee-50 border border-transparent focus:border-coffee-300 focus:bg-white focus:ring-2 focus:ring-coffee-100 text-coffee-800 rounded-xl px-12 py-3 outline-none transition-all placeholder-coffee-300/70">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-coffee-600 mb-1 ml-1">Password</label>
+                    <div class="relative">
+                        <i class="ph ph-lock-key absolute left-4 top-1/2 -translate-y-1/2 text-coffee-400 text-lg"></i>
+                        <input type="password" id="login-password" placeholder="••••••••" required
+                               class="w-full bg-coffee-50 border border-transparent focus:border-coffee-300 focus:bg-white focus:ring-2 focus:ring-coffee-100 text-coffee-800 rounded-xl px-12 py-3 outline-none transition-all placeholder-coffee-300/70">
+                    </div>
+                    <div class="flex justify-end mt-1">
+                        <a href="#" class="text-xs text-coffee-500 hover:text-coffee-700 font-bold" onclick="comingSoon()">Forgot Password?</a>
+                    </div>
+                </div>
+
+                <button type="submit" 
+                        class="w-full bg-coffee-500 hover:bg-coffee-600 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-coffee-200 transition-all transform hover:-translate-y-1 active:scale-95">
+                    Sign In
+                </button>
+            </form>
+
+            <form id="register-form" class="space-y-5 hidden" onsubmit="handleRegister(event)">
+                <div>
+                    <label class="block text-sm font-bold text-coffee-600 mb-1 ml-1">Full Name</label>
+                    <div class="relative">
+                        <i class="ph ph-user absolute left-4 top-1/2 -translate-y-1/2 text-coffee-400 text-lg"></i>
+                        <input type="text" id="reg-name" placeholder="Mochi Lover" required
+                               class="w-full bg-coffee-50 border border-transparent focus:border-coffee-300 focus:bg-white focus:ring-2 focus:ring-coffee-100 text-coffee-800 rounded-xl px-12 py-3 outline-none transition-all">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-coffee-600 mb-1 ml-1">Email Address</label>
+                    <div class="relative">
+                        <i class="ph ph-envelope absolute left-4 top-1/2 -translate-y-1/2 text-coffee-400 text-lg"></i>
+                        <input type="email" id="reg-email" placeholder="hello@example.com" required
+                               class="w-full bg-coffee-50 border border-transparent focus:border-coffee-300 focus:bg-white focus:ring-2 focus:ring-coffee-100 text-coffee-800 rounded-xl px-12 py-3 outline-none transition-all">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-coffee-600 mb-1 ml-1">Password</label>
+                    <div class="relative">
+                        <i class="ph ph-lock-key absolute left-4 top-1/2 -translate-y-1/2 text-coffee-400 text-lg"></i>
+                        <input type="password" id="reg-password" placeholder="Create a password" required
+                               class="w-full bg-coffee-50 border border-transparent focus:border-coffee-300 focus:bg-white focus:ring-2 focus:ring-coffee-100 text-coffee-800 rounded-xl px-12 py-3 outline-none transition-all">
+                    </div>
+                </div>
+
+                <button type="submit" 
+                        class="w-full bg-coffee-500 hover:bg-coffee-600 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-coffee-200 transition-all transform hover:-translate-y-1 active:scale-95">
+                    Create Account
+                </button>
+            </form>
+
+            <div class="mt-8 text-center text-coffee-600">
+                <p id="login-toggle-text">
+                    Don't have an account? 
+                    <button onclick="toggleForms()" class="text-rose-400 hover:text-rose-500 font-bold ml-1">Sign Up</button>
+                </p>
+                <p id="register-toggle-text" class="hidden">
+                    Already a member? 
+                    <button onclick="toggleForms()" class="text-rose-400 hover:text-rose-500 font-bold ml-1">Sign In</button>
+                </p>
+            </div>
+
+            <div class="mt-8 relative flex justify-center text-sm">
+                <span class="bg-white px-2 text-coffee-300 relative z-10">Or continue with</span>
+                <div class="absolute inset-x-0 top-1/2 border-t border-coffee-100 -z-0"></div>
+            </div>
+            <div class="flex justify-center gap-4 mt-4">
+                <button class="w-12 h-12 rounded-full border border-coffee-100 flex items-center justify-center hover:bg-coffee-50 transition-colors text-coffee-600" onclick="showGoogleAlert()">
+                    <i class="ph-fill ph-google-logo text-xl"></i>
+                </button>
+                <button class="w-12 h-12 rounded-full border border-coffee-100 flex items-center justify-center hover:bg-coffee-50 transition-colors text-coffee-600" onclick="showFacebookAlert()">
+                    <i class="ph-fill ph-facebook-logo text-xl"></i>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="toast" class="fixed top-6 right-6 bg-coffee-800 text-white px-6 py-3 rounded-xl shadow-xl transform translate-y-[-200%] transition-transform duration-300 z-50 flex items-center gap-3">
+        <i id="toast-icon" class="ph-fill ph-warning-circle text-xl"></i>
+        <span id="toast-message">Notification</span>
+    </div>
+
+    <script>
+        // --- 1. STATE MANAGEMENT ---
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+        const formTitle = document.getElementById('form-title');
+        const loginToggle = document.getElementById('login-toggle-text');
+        const registerToggle = document.getElementById('register-toggle-text');
+
+        // --- 2. TOGGLE UI ---
+        function toggleForms() {
+            // Check which is currently hidden to decide logic
+            const isLoginVisible = !loginForm.classList.contains('hidden');
+
+            if (isLoginVisible) {
+                // Switch to Register
+                loginForm.classList.add('hidden');
+                loginToggle.classList.add('hidden');
+                
+                registerForm.classList.remove('hidden');
+                registerForm.classList.add('form-enter'); // Add animation
+                registerToggle.classList.remove('hidden');
+                formTitle.innerText = "Create Account";
+            } else {
+                // Switch to Login
+                registerForm.classList.add('hidden');
+                registerToggle.classList.add('hidden');
+                
+                loginForm.classList.remove('hidden');
+                loginForm.classList.add('form-enter'); // Add animation
+                loginToggle.classList.remove('hidden');
+                formTitle.innerText = "Sign In";
+            }
+        }
+
+        // --- 3. BACKEND SIMULATION (LocalStorage) ---
+        
+        // Helper: Show Notification
+        function showToast(msg, type = 'success') {
+            const toast = document.getElementById('toast');
+            const msgEl = document.getElementById('toast-message');
+            const iconEl = document.getElementById('toast-icon');
+
+            msgEl.innerText = msg;
+            
+            if(type === 'success') {
+                iconEl.className = 'ph-fill ph-check-circle text-green-400 text-xl';
+            } else {
+                iconEl.className = 'ph-fill ph-warning-circle text-rose-400 text-xl';
+            }
+
+            toast.classList.remove('translate-y-[-200%]');
+            setTimeout(() => {
+                toast.classList.add('translate-y-[-200%]');
+            }, 3000);
+        }
+
+        // Handle Register
+        function handleRegister(e) {
+            e.preventDefault();
+            const name = document.getElementById('reg-name').value;
+            const email = document.getElementById('reg-email').value;
+            const password = document.getElementById('reg-password').value;
+
+            // Simple "Database" Check
+            const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+            
+            if (existingUsers.find(u => u.email === email)) {
+                showToast('Email already registered!', 'error');
+                return;
+            }
+
+            // Save User
+            const newUser = { name, email, password };
+            existingUsers.push(newUser);
+            localStorage.setItem('users', JSON.stringify(existingUsers));
+
+            showToast('Account created! Please sign in.');
+            
+            // Clear inputs and switch to login
+            document.getElementById('reg-name').value = '';
+            document.getElementById('reg-email').value = '';
+            document.getElementById('reg-password').value = '';
+            setTimeout(() => toggleForms(), 1000);
+        }
+
+        // Handle Login
+        function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            // Check "Database"
+            const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+            const user = existingUsers.find(u => u.email === email && u.password === password);
+
+            if (user) {
+                showToast(`Welcome back, ${user.name}!`);
+                
+                // Simulate Login Persistence
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                
+                // Redirect logic (In a real app, this goes to dashboard)
+                setTimeout(() => {
+                    window.location.href = 'home.html'; // Points to the main coffee shop page
+                }, 1500);
+            } else {
+                showToast('Invalid email or password', 'error');
+            }
+        }
+    </script>
+</body>
+</html>

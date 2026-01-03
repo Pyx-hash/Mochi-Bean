@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mochi & Bean | Cute Coffee Shop</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link href="home.css" rel="stylesheet"/>
+
+    <script type="module">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ["Quicksand", "sans-serif"],
+                    },
+                    colors: {
+                        coffee: {
+                            50: "#fdf8f6",
+                            100: "#f2e8e5",
+                            200: "#eaddd7",
+                            300: "#e0cec7",
+                            400: "#d2bab0",
+                            500: "#a77f72",
+                            600: "#8a6459",
+                            800: "#4a332a",
+                            900: "#2c1e19",
+                        },
+                        cream: "#FFFDD0",
+                        matcha: "#B0C4B1",
+                        rose: "#F4ACB7",
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-coffee-50 text-coffee-800 antialiased">
+    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md shadow-md border-b border-coffee-100 transition-all duration-300" id="navbar">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="home.html" class="flex items-center gap-2 group">
+            <i class="ph-fill ph-coffee text-3xl text-coffee-500 group-hover:rotate-12 transition-transform"></i>
+            <span class="text-2xl font-bold tracking-tight text-coffee-800">Mochi<span class="text-coffee-500">&</span>Bean</span>
+        </a>
+        <div class="hidden md:flex items-center gap-8 font-medium text-coffee-600">
+            <a href="#home" class="hover:text-coffee-500 transition-colors">Home</a>
+            <a href="#menu" class="hover:text-coffee-500 transition-colors">Menu</a>
+            <a href="#about" class="hover:text-coffee-500 transition-colors">Our Story</a>
+        </div>
+        <div class="flex items-center gap-4">
+            <button onclick="toggleCart()" class="relative p-2 rounded-full hover:bg-coffee-100 transition-colors">
+                <i class="ph ph-shopping-cart text-2xl text-coffee-800"></i>
+                <span id="cart-count" class="absolute top-0 right-0 bg-rose text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center transform scale-0 transition-transform duration-200">0</span>
+            </button>
+            <button class="md:hidden p-2 text-coffee-800">
+                <i class="ph ph-list text-2xl"></i>
+            </button>
+        </div>
+    </div>        
+    </nav>
+    <section id="home" class="pt-32 pb-20 px-6">
+        <div class="container mx-auto flex flex-col-reverse md:flex-row items-center gap-12">
+            <div class="flex-1 text-center md:text-left space-y-6">
+                <span class="bg-coffee-100 text-coffee-600 px-4 py-1 rounded-full text-sm font-semibold tracking-wide uppercase">New Seasonal Menu  &#127810;</span>
+                <h1 class="text-5xl md:text-6xl font-bold leading-tight text-coffee-900">Sip happiness in <br/> every <span class="text-coffee-500 italic">cup.</span></h1>
+                <p class="text-lg text-coffee-600 md:max-w-lg">Handcrafted espresso, fresh pastries, and a cozy atmosphere waiting just for you. Come for the coffee, stay for the vibes.</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-4">
+                    <a href="#menu" class="bg-coffee-500 hover:bg-coffee-600 text-white px-8 py-3 rounded-2xl font-bold shadow-lg shadow-coffee-200 transition-all transform hover:-translate-y-1">Order Now</a>
+                    <a href="#about" class="bg-white border-2 border-coffee-100 hover:border-coffee-300 text-coffee-600 px-8 py-3 rounded-2xl font-bold transition-all">Learn More</a>
+                </div>
+            </div>
+            <div class="flex-1 flex justify-center relative">
+                <div class="absolute w-80 h-80 bg-rose/20 rounded-full blur-3xl -z-10 top-10 right-10"></div>
+                <img src="assets/images/hero-logo.png" alt="Cute Coffee Cup" class="w-full max-w-md rounded-[3rem] shadow-2xl animate-float object-cover h-[500px]">
+            </div>
+        </div>
+    </section>
+    <section id="menu" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-coffee-900 mb-4">Our Favorites</h2>
+            <p class="text-coffee-600">Curated specifically for your daily dose of joy.</p>
+            <div class="flex justify-center gap-3 mt-8 flex-wrap">
+                <button class="filter-btn active bg-coffee-500 text-white px-6 py-2 rounded-full font-medium transition-colors shadow-md" data-category="all">All</button>
+                <button class="filter-btn bg-coffee-50 text-coffee-600 hover:bg-coffee-100 px-6 py-2 rounded-full font-medium transition-colors" data-category="coffee">Coffee</button>
+                <button class="filter-btn bg-coffee-50 text-coffee-600 hover:bg-coffee-100 px-6 py-2 rounded-full font-medium transition-colors" data-category="pastry">Pastries</button>
+            </div>
+        </div>
+        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-9"></div>
+    </section>
+    <section id="about" class="py-20 bg-coffee-50">
+        <div class="container mx-auto px-6">
+            <div class="bg-coffee-500 rounded-[2.5rem] p-8 md:p-16 text-center md:text-left text-white shadow-xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h064 bg-white/10 rounded-full -mr-16 -m5-16 blur-2xl"></div>
+                <div class="relative z-10 flex flex-col md:flex-row items-center gap-10">
+                    <div class="flex-1">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-6">Brewed with Love &#10084;</h2>
+                        <p class="text-coffee-100 text-lg leading-relaxed mb-6">
+                            Started in a small kitchen, Mochi & Bean has grown into a community haven.
+                            We source our beans ethically and bake our pastries fresh every single morning (at 4 AM!).
+                        </p>
+                        <div class="flex gap-8">
+                            <div>
+                                <h4 class="text-3xl font-bold">5k+</h4>
+                                <span class="text-coffee-200 text-sm">Happy Customers</span>
+                            </div>
+                            <div>
+                                <h4 class="text-3xl font-bold">120+</h4>
+                                <span class="text-coffee-200 text-sm">Menu Items</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-1 w-full">
+                        <img src="assets/images/barista.webp" alt="Barista" class="rounded-3xl shadow-lg w-full w-64 object-cover transform rotate-2 hover:rotate-0 transition-transform duration-500">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="mt-24 bg-white border-t border-coffee-100 rounded-t-[3rem] shadow-[0_-10px_40px_rgba(167,127,114,0.05)]">
+        <div class="mx-auto max-w-6xl px-6 py-12">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+                <div class="flex flex-col items-center md:items-start gap-2">
+                    <div class="flex items-center gap-2 group cursor-default">
+                        <i class="ph-fill ph-heart text-rose-400 group-hover:scale-125 transition-transform"></i>
+                        <span class="text-xl font-bold text-coffee-800 tracking-tight">Red Ixe Lacorte</span>
+                    </div>
+                    <p class="text-coffee-400 text-sm">&copy; <span id="year"></span> All Rights Reserved.</p>
+                </div>
+                <div class="flex flex-col items-center md:items-end gap-4">
+                    <div class="flex items-center gap-6 text-sm font-semibold text-coffee-600">
+                        <a class="hover:text-rose-400 transition-colors" href="#" onclick="document.getElementById('terms-modal').showModal(); return false;">Terms & Support</a>
+                        <a class="hover:text-rose-400 transition-colors" href="#" onclick="document.getElementById('privacy-modal').showModal(); return false;">Privacy Policy</a>
+                    </div>
+                    <div class="flex items-center gap-2 text-xs text-coffee-300 italic">
+                        <span>Designed with TailwindCSS</span>
+                        <i class="ph-fill ph-sparkles text-coffee-200"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <dialog id="terms-modal" class="backdrop:bg-coffee-90/40 backdrop:backdrop-blur-sm rounded-[2rem] max-w-lg w-[92%] p-0 overflow-hidden border-none shadow-2xl">
+        <div class="bg-coffee-50 p-1">
+            <div class="bg-white rounded-[1.8rem] overflow-hidden flex flex-col max-h-[85vh]">
+                <div class="flex items-center justify-between px-6 py-5 bg-coffee-100/50 sticky top-0 z-10">
+                    <h3 class="font-bold text-coffee-800 flex items-center gap-2">
+                        <i class="ph-bold ph-file-text text-rose-400"></i> Terms & Support
+                    </h3>
+                    <button class="w-8 h-8 flex items-center justify-center bg-white hover:bg-rose-100 hover:text-rose-50 rounded-full transition-colors text-coffee-800 shadow-sm" onclick="document.getElementById('terms-modal').close()">X</button>
+                </div>
+                <div class="p-8 overflow-y-auto text-sm text-coffee-600 space-y-6 leading-relaxed custom-scrollbar">
+                    <section>
+                        <h4 class="font-bold text-coffee-800 mb-2 italic">1. Welcome to the Mochi & Bean!</h4>
+                        <p>By browsing Mochi & Bean, you're agreeing to follow these house rules.
+                            If you don't agree with them, you should probably stop using the site.
+                        </p>
+                    </section>
+                    <section>
+                        <h4 class="font-bold text-coffee-800 mb-2 italic">2. Use of the Website</h4>
+                        <p>Please be kind. Don't try to hack our site or use it for anything "not-so-sweet" (illegal).
+                            We reserve the right to fix typos or pricing errors at any time.
+                        </p>
+                    </section>
+                    <section>
+                        <h4 class="font-bold text-coffee-800 mb-2 italic">3. Intellectual Property</h4>
+                        <p>Every cute icon and photo belongs to Red Ixe Lacorte.
+                            You can share our site on social media, but please don't steal our designs for commercial use!
+                        </p>
+                    </section>
+                    <div class="bg-rose-50 p-4 rounded-2xl border border-rose-100 text-center">
+                        <p class="font-bold text-rose-500 mb-2">Need Support?</p>
+                        <a class="underline font-bold text-coffee-800" href="mailto:redlienuexvane@gmail.com">redlienuexvane@gmail.com</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </dialog>
+    <dialog id="privacy-modal" class="backdrop:bg-coffee-900/40 backdrop:backdrop-blur-sm rounded-[2rem] max-w-lg w-[92%] p-0 overflow-hidden border-none shadow-2xl">
+  <div class="bg-coffee-50 p-1">
+    <div class="bg-white rounded-[1.8rem] overflow-hidden flex flex-col max-h-[85vh]">
+      <div class="flex items-center justify-between px-6 py-5 bg-rose-50 sticky top-0 z-10">
+        <h3 class="font-bold text-coffee-800 flex items-center gap-2">
+          <i class="ph-bold ph-shield-check text-rose-400"></i> Privacy Policy
+        </h3>
+        <button class="w-8 h-8 flex items-center justify-center bg-white hover:bg-rose-100 hover:text-rose-500 rounded-full transition-colors text-coffee-400 shadow-sm" onclick="document.getElementById('privacy-modal').close()">✕</button>
+      </div>
+
+      <div class="p-8 overflow-y-auto text-sm text-coffee-600 space-y-6 leading-relaxed custom-scrollbar">
+        <div class="text-center mb-6">
+            <div class="w-16 h-16 bg-rose-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                <i class="ph-fill ph-heart text-rose-400 text-3xl"></i>
+            </div>
+            <p class="font-bold text-coffee-800">Your privacy is our secret ingredient.</p>
+        </div>
+
+        <section>
+          <h4 class="font-bold text-coffee-800 mb-1 italic underline decoration-rose-200 decoration-2">1. Data Ingredients</h4>
+          <p>We collect your name and email when you message us, and use Local Storage to remember your cart so it doesn't disappear!</p>
+        </section>
+
+        <section>
+          <h4 class="font-bold text-coffee-800 mb-1 italic underline decoration-rose-200 decoration-2">2. How We Use It</h4>
+          <p>To process orders, respond to your sweet messages, and improve your experience. We never sell your data to third parties.</p>
+        </section>
+
+        <section>
+          <h4 class="font-bold text-coffee-800 mb-1 italic underline decoration-rose-200 decoration-2">3. Your Rights</h4>
+          <p>You can request to see or delete your data anytime. Just send us a friendly email at <span class="font-bold">redlienuexvane@gmail.com</span>.</p>
+        </section>
+
+        <button onclick="document.getElementById('privacy-modal').close()" class="w-full py-3 bg-coffee-800 text-white rounded-xl font-bold hover:bg-coffee-900 transition-all">I Understand!</button>
+      </div>
+    </div>
+  </div>
+</dialog>
+<div id="cart-overlay" class="fixed inset-0 bg-black/20 backdrop-blur-sm z-50 hidden transition-opacity opacity-0" onclick="toggleCart()"></div>
+<div id="cart-drawer" class="fixed top-0 right-0 h-full w-full md:w-[400px] bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col">
+    <div class="p-6 border-b border-coffee-100 flex justify-between items-center bg-coffee-50">
+        <h2 class="text-xl font-bold text-coffee-900 flex items-center gap-2"><i class="ph-fill ph-shopping-bag"></i> 
+            Your Cart
+    </h2>
+    <button onclick="toggleCart()" class="p-2 hover:bg-coffee-200 rounded-full transition-colors text-coffee-600">
+        <i class="ph ph-x text-xl"></i>
+    </button>
+    </div>
+    <div id="cart-items-container" class="flex-1 overflow-y-auto p-6 space-y-4 no-scrollbar">
+        <div id="empty-cart-msg" class="h-full flex flex-col items-center justify-center text-center space-y-4 text-coffee-400">
+            <i class="ph ph-basket text-6xl opacity-50"></i>
+            <p>Your basket is empty. <br> Add some goodies!</p>
+        </div>
+    </div>
+    <div class="p-6 border-t border-coffee-100 bg-white shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
+        <div class="flex justify-between items-center mb-4 text-lg font-bold text-coffee-900">
+            <span>Total:</span>
+            <span id="cart-total">₱0.00</span>
+        </div>
+        <button onclick="checkout()" class="w-full bg-coffee-500 hover:bg-coffee-600 text-white py-4 rounded-xl font-bold transition-all transform active:scale-95 shadow-lg shadow-coffee-200">
+            Checkout Now
+        </button>
+    </div>
+</div>
+<div id="toast" class="fixed top-24 right-6 bg-coffee-800 text-white px-6 py-3 rounded-xl shadow-xl transform translate-x-full opacity-0 transition-all duration-300 z-[60px] flex items-center gap-3">
+    <i class="ph-fill ph-check-circle text-green-400 text-xl"></i>
+    <span>Item added to cart!</span>
+</div>
+</body>
+</html>
+<script src="assets/js/data.js" type="module"></script>
+<script src="script.js"></script>
